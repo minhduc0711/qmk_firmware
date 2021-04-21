@@ -220,6 +220,19 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LCTL_T(KC_ESC):
+            return 50;
+        case RSFT_T(KC_ENT):
+            return 50;
+        case LT(_SPACE_FN, KC_SPC):
+            return 125;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case QWERTY:
