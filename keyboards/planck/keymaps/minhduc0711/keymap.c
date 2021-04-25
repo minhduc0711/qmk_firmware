@@ -36,8 +36,15 @@ enum planck_keycodes {
   DVORAK,
   PLOVER,
   BACKLIT,
-  EXT_PLV
+  EXT_PLV,
+  LENNY,
+  SHRUG,
+  GIFF
 };
+
+char LENNY_STR[] = "( ͡° ͜ʖ ͡°)";
+char SHRUG_STR[] = "¯\\_(ツ)_/¯";
+char GIFF_STR[] = "つ◕_◕つ";
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
@@ -149,9 +156,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 [_FN] = LAYOUT_planck_grid(
     XXXXXXX,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,    KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,  XXXXXXX,
-    XXXXXXX,  KC_F11,  KC_F12,  XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX,  KC_F11,  KC_F12,  XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,  LENNY,   SHRUG,   GIFF,    XXXXXXX, XXXXXXX,
     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX,  _______, XXXXXXX, XXXXXXX, XXXXXXX,  KC_SPC,   KC_SPC,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+    XXXXXXX,  _______, XXXXXXX, XXXXXXX, XXXXXXX,  KC_SPC,   KC_SPC,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, UC_MOD
 ),
 
 /* Space fn
@@ -296,6 +303,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           PLAY_SONG(plover_gb_song);
         #endif
         layer_off(_PLOVER);
+      }
+      return false;
+      break;
+    case LENNY:
+      if (record->event.pressed) {
+        send_unicode_string(LENNY_STR);
+      }
+      return false;
+      break;
+    case SHRUG:
+      if (record->event.pressed) {
+        send_unicode_string(SHRUG_STR);
+      }
+      return false;
+      break;
+    case GIFF:
+      if (record->event.pressed) {
+        send_unicode_string(GIFF_STR);
       }
       return false;
       break;

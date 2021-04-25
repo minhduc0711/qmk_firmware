@@ -34,5 +34,9 @@
 // Most tactile encoders have detents every 4 stages
 #define ENCODER_RESOLUTION 4
 
+// Tap-hold configs
 #define TAPPING_TERM_PER_KEY
 #define RETRO_TAPPING
+
+// Unicode support
+#define UNICODE_SELECTED_MODES UC_LNX, UC_WINC
