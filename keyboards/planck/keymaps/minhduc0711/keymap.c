@@ -21,6 +21,7 @@
 enum planck_layers {
   _QWERTY,
   _COLEMAK,
+  _GAMING,
   _LOWER,
   _RAISE,
   _ADJUST,
@@ -31,6 +32,7 @@ enum planck_layers {
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
   COLEMAK,
+  GAMING,
   LENNY,
   SHRUG,
   GIFF
@@ -81,6 +83,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LCTL_T(KC_ESC),  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
     KC_LSFT,         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
     KC_LCTL,         FN  ,    KC_LGUI, KC_LALT, LOWER,   SPC_FN,  SPC_FN,  RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
+),
+
+/* Gaming
+ * ,-----------------------------------------------------------------------------------.
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Esc  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Brite| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_GAMING] = LAYOUT_planck_grid(
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
+    KC_LCTL, FN  ,    KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
 ),
 
 /* Lower
@@ -168,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_grid(
-    RESET,   QWERTY,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, AU_ON,   AU_OFF,   RGB_TOG, RGB_MOD, XXXXXXX,
+    RESET,   QWERTY,  XXXXXXX, XXXXXXX, XXXXXXX, GAMING,  XXXXXXX, AU_ON,   AU_OFF,   RGB_TOG, RGB_MOD, XXXXXXX,
     DEBUG,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, AG_NORM, AG_SWAP, MU_ON,   MU_OFF,   RGB_HUI, RGB_HUD, XXXXXXX,
     _______, XXXXXXX, XXXXXXX, COLEMAK, XXXXXXX, XXXXXXX, XXXXXXX, MUV_DE,  MUV_IN,   MU_MOD,  XXXXXXX, XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
@@ -210,6 +230,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case COLEMAK:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_COLEMAK);
+      }
+      return false;
+      break;
+    case GAMING:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_GAMING);
       }
       return false;
       break;
