@@ -36,6 +36,7 @@
 
 // Tap-hold configs
 #define TAPPING_TERM_PER_KEY
+#define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
 #define RETRO_TAPPING
 
 // Unicode support

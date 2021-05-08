@@ -210,11 +210,20 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case LCTL_T(KC_ESC):
             return 50;
         case RSFT_T(KC_ENT):
-            return 100;
-        case LT(_SPACE_FN, KC_SPC):
-            return 150;
+            return 125;
+        case SPC_FN:
+            return 125;
         default:
             return TAPPING_TERM;
+    }
+}
+
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case SPC_FN:
+            return true;
+        default:
+            return false;
     }
 }
 
