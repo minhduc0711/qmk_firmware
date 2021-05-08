@@ -116,9 +116,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 [_LOWER] = LAYOUT_planck_grid(
     XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,     KC_7,     KC_8,    KC_9,     KC_0,     KC_BSPC,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ASTR,  KC_4,     KC_5,    KC_6,     KC_PLUS,  KC_DEL,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SLSH,  KC_1,     KC_2,    KC_3,     KC_MINS,  XXXXXXX,
-    _______, XXXXXXX, _______, _______, _______, KC_SPC,  KC_SPC,   _______,  KC_0,    KC_DOT,   KC_EQL,   XXXXXXX
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_4,     KC_5,    KC_6,     XXXXXXX,  KC_DEL,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_1,     KC_2,    KC_3,     XXXXXXX,  XXXXXXX,
+    _______, XXXXXXX, _______, _______, _______, KC_SPC,  KC_SPC,   _______,  KC_0,    XXXXXXX,  XXXXXXX,  XXXXXXX
 ),
 
 /* Raise
@@ -190,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_planck_grid(
     RESET,   QWERTY,  XXXXXXX, XXXXXXX, XXXXXXX, GAMING,  XXXXXXX, AU_ON,   AU_OFF,   RGB_TOG, RGB_MOD, XXXXXXX,
     DEBUG,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, AG_NORM, AG_SWAP, MU_ON,   MU_OFF,   RGB_HUI, RGB_HUD, XXXXXXX,
-    _______, XXXXXXX, XXXXXXX, COLEMAK, XXXXXXX, XXXXXXX, XXXXXXX, MUV_DE,  MUV_IN,   MU_MOD,  XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, COLEMAK, XXXXXXX, XXXXXXX, XXXXXXX, MUV_DE,  MUV_IN,   MU_MOD,  XXXXXXX, XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
 )
 
