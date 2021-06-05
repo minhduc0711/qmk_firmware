@@ -114,17 +114,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #endif
 
 layer_state_t layer_state_set_user(layer_state_t state) {
+  uint8_t default_layer = 0;
+  bool l_qwerty = false;
+  bool l_gaming = false;
+  default_layer = eeconfig_read_default_layer();
+
+  if (default_layer & (1UL << _QWERTY)) {
+    l_qwerty = true;
+  } else if (default_layer & (1UL << _GAMING)) {
+    l_gaming = true;
+  }
+
   state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
   switch (get_highest_layer(state)) {
-    case _QWERTY:
-      rgblight_setrgb(0x88, 0xcc, 0x00);
-      break;
-    case _COLEMAK:
-      rgblight_setrgb(0x7f, 0x00, 0xff);
-      break;
-    case _GAMING:
-      rgblight_setrgb(0x00, 0xb7, 0xeb);
-      break;
     case _LOWER:
       rgblight_setrgb(0xff, 0x00, 0x00);
       break;
@@ -138,8 +140,13 @@ layer_state_t layer_state_set_user(layer_state_t state) {
       rgblight_setrgb(0xff, 0xff, 0x00);
       break;
     default:
-      rgblight_setrgb(0x00, 0xff, 0xff);
-      break;
+      if (l_qwerty) {
+        rgblight_setrgb(0x88, 0xcc, 0x00);
+      } else if (l_gaming) {
+        rgblight_setrgb(0x00, 0xb7, 0xeb);
+      } else {
+        rgblight_setrgb(0x7f, 0x00, 0xff);
+      }
   }
   return state;
 }
