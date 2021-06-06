@@ -116,11 +116,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 layer_state_t layer_state_set_user(layer_state_t state) {
   uint8_t default_layer = 0;
   bool l_qwerty = false;
+  bool l_colemak = false;
   bool l_gaming = false;
   default_layer = eeconfig_read_default_layer();
 
   if (default_layer & (1UL << _QWERTY)) {
     l_qwerty = true;
+  } else if (default_layer & (1UL << _COLEMAK)) {
+    l_colemak = true;
   } else if (default_layer & (1UL << _GAMING)) {
     l_gaming = true;
   }
@@ -136,16 +139,19 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     case _SPACE_FN:
       rgblight_setrgb(0xff, 0x45, 0x00);
       break;
+    case _FN:
+      rgblight_setrgb(0x44, 0x3d, 0xff);
+      break;
     case _ADJUST:
       rgblight_setrgb(0xff, 0xff, 0x00);
       break;
     default:
       if (l_qwerty) {
         rgblight_setrgb(0x88, 0xcc, 0x00);
+      } else if (l_colemak) {
+        rgblight_setrgb(0x7f, 0x00, 0xff);
       } else if (l_gaming) {
         rgblight_setrgb(0x00, 0xb7, 0xeb);
-      } else {
-        rgblight_setrgb(0x7f, 0x00, 0xff);
       }
   }
   return state;
