@@ -49,61 +49,61 @@ char GIFF_STR[] = "つ◕_◕つ";
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-[_QWERTY] = LAYOUT_planck_grid(
+[_QWERTY] = LAYOUT_planck_1x2uC(
     KC_TAB,          KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     LCTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT,         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
-    KC_LCTL,         FN  ,    KC_LGUI, KC_LALT, LOWER,   SPC_FN,  SPC_FN,  RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
+    KC_LCTL,         FN  ,    KC_LGUI, KC_LALT, LOWER,       SPC_FN,       RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
 ),
 
-[_COLEMAK] = LAYOUT_planck_grid(
+[_COLEMAK] = LAYOUT_planck_1x2uC(
     KC_TAB,          KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     LCTL_T(KC_ESC),  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
     KC_LSFT,         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
-    KC_LCTL,         FN  ,    KC_LGUI, KC_LALT, LOWER,   SPC_FN,  SPC_FN,  RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
+    KC_LCTL,         FN  ,    KC_LGUI, KC_LALT, LOWER,       SPC_FN,       RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
 ),
 
 // Colemak but with no mod-taps
-[_GAMING] = LAYOUT_planck_grid(
+[_GAMING] = LAYOUT_planck_1x2uC(
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-    KC_LCTL, FN  ,    KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
+    KC_LCTL, FN  ,    KC_LGUI, KC_LALT, LOWER,       KC_SPC,       RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
 ),
 
-[_LOWER] = LAYOUT_planck_grid(
+[_LOWER] = LAYOUT_planck_1x2uC(
     XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,     KC_7,     KC_8,    KC_9,     KC_0,     KC_BSPC,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_4,     KC_5,    KC_6,     XXXXXXX,  KC_DEL,
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_1,     KC_2,    KC_3,     XXXXXXX,  KC_INS,
-    _______, XXXXXXX, _______, _______, _______, KC_SPC,  KC_SPC,   _______,  KC_0,    XXXXXXX,  XXXXXXX,  XXXXXXX
+    _______, XXXXXXX, _______, _______, _______,      KC_SPC,       _______,  KC_0,    XXXXXXX,  XXXXXXX,  XXXXXXX
 ),
 
-[_RAISE] = LAYOUT_planck_grid(
+[_RAISE] = LAYOUT_planck_1x2uC(
     KC_GRV,   KC_EXLM, KC_AT,    KC_HASH, KC_DLR,   KC_PERC,  KC_CIRC,  KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
     KC_TILD,  KC_PLUS, KC_UNDS,  KC_PIPE, KC_LCBR,  KC_LBRC,  KC_RBRC,  KC_RCBR, KC_BSLS, KC_MINS, KC_EQL,  XXXXXXX,
     XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    _______,  XXXXXXX, _______,  _______, _______,  KC_SPC,   KC_SPC,   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+    _______,  XXXXXXX, _______,  _______, _______,       KC_SPC,        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
-[_FN] = LAYOUT_planck_grid(
+[_FN] = LAYOUT_planck_1x2uC(
     XXXXXXX,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,    KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,  XXXXXXX,
     XXXXXXX,  KC_F11,  KC_F12,  XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,  LENNY,   SHRUG,   GIFF,    XXXXXXX, XXXXXXX,
     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX,  _______, XXXXXXX, XXXXXXX, XXXXXXX,  KC_SPC,   KC_SPC,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, UC_MOD
+    XXXXXXX,  _______, XXXXXXX, XXXXXXX, XXXXXXX,       KC_SPC,        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, UC_MOD
 ),
 
-[_SPACE_FN] = LAYOUT_planck_grid(
-    KC_SLEP,  XXXXXXX, KC_UP,    XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_VOLD,  KC_VOLU,  KC_MUTE,  XXXXXXX, KC_PSCR,
-    XXXXXXX,  KC_LEFT, KC_DOWN,  KC_RIGHT,  XXXXXXX,  XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, XXXXXXX, KC_SLCK,
+[_SPACE_FN] = LAYOUT_planck_1x2uC(
+    XXXXXXX,  XXXXXXX, KC_UP,    XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_VOLD,  KC_VOLU,  KC_MUTE,  XXXXXXX, KC_PSCR,
+    KC_SLEP,  KC_LEFT, KC_DOWN,  KC_RIGHT,  XXXXXXX,  XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, XXXXXXX, KC_SLCK,
     XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_MPRV,  KC_MPLY,  KC_MNXT,  XXXXXXX, XXXXXXX,
-    XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,  _______,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX
+    XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,       _______,       XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX
 ),
 
-[_ADJUST] = LAYOUT_planck_grid(
+[_ADJUST] = LAYOUT_planck_1x2uC(
     RESET,   QWERTY,  XXXXXXX, XXXXXXX, XXXXXXX, GAMING,  XXXXXXX, AU_ON,   AU_OFF,   RGB_TOG, RGB_MOD, XXXXXXX,
     DEBUG,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, AG_NORM, AG_SWAP, MU_ON,   MU_OFF,   RGB_HUI, RGB_HUD, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, COLEMAK, XXXXXXX, XXXXXXX, XXXXXXX, MUV_DE,  MUV_IN,   MU_MOD,  XXXXXXX, XXXXXXX,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
+    _______, _______, _______, _______, _______,     _______,      _______, _______,  _______, _______, _______
 )
 
 };
