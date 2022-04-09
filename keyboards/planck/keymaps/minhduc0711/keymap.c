@@ -21,6 +21,7 @@
 enum planck_layers {
   _QWERTY,
   _COLEMAK,
+  _COLEMAK_FR,
   _GAMING,
   _LOWER,
   _RAISE,
@@ -32,6 +33,7 @@ enum planck_layers {
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
   COLEMAK,
+  COLEMAK_FR,
   GAMING,
   LENNY,
   SHRUG,
@@ -63,6 +65,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL,         FN  ,    KC_LGUI, KC_LALT, LOWER,       SPC_FN,       RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
 ),
 
+// Only use altgr instead of Lalt for typing french accents
+[_COLEMAK_FR] = LAYOUT_planck_1x2uC(
+    KC_TAB,          KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
+    LCTL_T(KC_ESC),  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+    KC_LSFT,         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
+    KC_LCTL,         FN  ,    KC_LGUI, KC_RALT, LOWER,       SPC_FN,       RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
+),
+
 // Colemak but with no mod-taps
 [_GAMING] = LAYOUT_planck_1x2uC(
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
@@ -74,13 +84,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = LAYOUT_planck_1x2uC(
     XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,     KC_7,     KC_8,    KC_9,     KC_0,     KC_BSPC,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_4,     KC_5,    KC_6,     XXXXXXX,  KC_DEL,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_1,     KC_2,    KC_3,     XXXXXXX,  KC_INS,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_1,     KC_2,    KC_3,     XXXXXXX,  XXXXXXX,
     _______, XXXXXXX, _______, _______, _______,      KC_SPC,       _______,  KC_0,    XXXXXXX,  XXXXXXX,  XXXXXXX
 ),
 
 [_RAISE] = LAYOUT_planck_1x2uC(
     KC_GRV,   KC_EXLM, KC_AT,    KC_HASH, KC_DLR,   KC_PERC,  KC_CIRC,  KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
-    KC_TILD,  KC_PLUS, KC_UNDS,  KC_PIPE, KC_LCBR,  KC_LBRC,  KC_RBRC,  KC_RCBR, KC_BSLS, KC_MINS, KC_EQL,  XXXXXXX,
+    KC_TILD,  KC_PLUS, KC_UNDS,  KC_PIPE, KC_LCBR,  KC_LBRC,  KC_RBRC,  KC_RCBR, KC_BSLS, KC_MINS, KC_EQL,  KC_INS,
     XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     _______,  XXXXXXX, _______,  _______, _______,       KC_SPC,        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
@@ -100,10 +110,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_ADJUST] = LAYOUT_planck_1x2uC(
-    RESET,   QWERTY,  XXXXXXX, XXXXXXX, XXXXXXX, GAMING,  XXXXXXX, AU_ON,   AU_OFF,   RGB_TOG, RGB_MOD, XXXXXXX,
-    DEBUG,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, AG_NORM, AG_SWAP, MU_ON,   MU_OFF,   RGB_HUI, RGB_HUD, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, COLEMAK, XXXXXXX, XXXXXXX, XXXXXXX, MUV_DE,  MUV_IN,   MU_MOD,  XXXXXXX, XXXXXXX,
-    _______, _______, _______, _______, _______,     _______,      _______, _______,  _______, _______, _______
+    RESET,   QWERTY,  XXXXXXX, COLEMAK_FR, XXXXXXX, GAMING,  XXXXXXX, AU_ON,   AU_OFF,   RGB_TOG, RGB_MOD, XXXXXXX,
+    DEBUG,   XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, AG_NORM, AG_SWAP, MU_ON,   MU_OFF,   RGB_HUI, RGB_HUD, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, COLEMAK,    XXXXXXX, XXXXXXX, XXXXXXX, MUV_DE,  MUV_IN,   MU_MOD,  XXXXXXX, XXXXXXX,
+    _______, _______, _______, _______,    _______, _______, _______, _______,  _______, _______, _______
 )
 
 };
@@ -117,6 +127,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   uint8_t default_layer = 0;
   bool l_qwerty = false;
   bool l_colemak = false;
+  bool l_colemak_fr = false;
   bool l_gaming = false;
   default_layer = eeconfig_read_default_layer();
 
@@ -124,6 +135,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     l_qwerty = true;
   } else if (default_layer & (1UL << _COLEMAK)) {
     l_colemak = true;
+  } else if (default_layer & (1UL << _COLEMAK_FR)) {
+    l_colemak_fr = true;
   } else if (default_layer & (1UL << _GAMING)) {
     l_gaming = true;
   }
@@ -150,6 +163,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         rgblight_setrgb(0x88, 0xcc, 0x00);
       } else if (l_colemak) {
         rgblight_setrgb(0x7f, 0x00, 0xff);
+      } else if (l_colemak_fr) {
+        rgblight_setrgb(0xff, 0xff, 0xff);
       } else if (l_gaming) {
         rgblight_setrgb(0x00, 0xb7, 0xeb);
       }
@@ -191,6 +206,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case COLEMAK:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_COLEMAK);
+      }
+      return false;
+      break;
+    case COLEMAK_FR:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_COLEMAK_FR);
       }
       return false;
       break;
