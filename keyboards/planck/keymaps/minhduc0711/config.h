@@ -41,3 +41,6 @@
 
 // Unicode support
 #define UNICODE_SELECTED_MODES UC_LNX, UC_WINC
+
+// Turn off lights when PC is sleeping
+#define RGBLIGHT_SLEEP 1
