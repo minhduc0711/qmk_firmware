@@ -44,5 +44,11 @@
 // Unicode support
 #define UNICODE_SELECTED_MODES UC_LNX, UC_WINC
 
+// Enable RGB lights as layer indicators
+#define RGBLIGHT_LAYERS
+#define RGBLIGHT_MAX_LAYERS 10
+// Some custom colors
+#define HSV_DARK_AZURE 149, 255, 255
+
 // Turn off lights when PC is sleeping
 #define RGBLIGHT_SLEEP 1

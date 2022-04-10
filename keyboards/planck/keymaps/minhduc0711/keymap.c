@@ -30,6 +30,52 @@ enum planck_layers {
   _SPACE_FN
 };
 
+// Define layer light indicators
+const rgblight_segment_t PROGMEM colemak_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 8, HSV_PURPLE}
+);
+const rgblight_segment_t PROGMEM colemak_fr_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {2, 2, HSV_BLUE},
+    {1, 1, HSV_WHITE},
+    {4, 1, HSV_WHITE},
+    {5, 1, HSV_WHITE},
+    {8, 1, HSV_WHITE},
+    {6, 2, HSV_RED}
+);
+const rgblight_segment_t PROGMEM gaming_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 8, HSV_CORAL}
+);
+const rgblight_segment_t PROGMEM qwerty_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 8, HSV_YELLOW}
+);
+const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 8, HSV_DARK_AZURE}
+);
+const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 8, HSV_ORANGE}
+);
+const rgblight_segment_t PROGMEM fn_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 8, HSV_SPRINGGREEN}
+);
+const rgblight_segment_t PROGMEM space_fn_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 8, HSV_GOLDENROD}
+);
+const rgblight_segment_t PROGMEM adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 8, HSV_RED}
+);
+const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    colemak_layer,
+    colemak_fr_layer,
+    gaming_layer,
+    qwerty_layer,
+    lower_layer,
+    raise_layer,
+    fn_layer,
+    space_fn_layer,
+    adjust_layer
+);
+
+
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
   COLEMAK,
@@ -118,58 +164,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-#ifdef AUDIO_ENABLE
-  float plover_song[][2]     = SONG(PLOVER_SOUND);
-  float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
-#endif
+void keyboard_post_init_user(void) {
+    // Enable the LED layers
+    rgblight_layers = rgb_layers;
+}
+
+/* bool led_update_user(led_t led_state) { */
+/*     rgblight_set_layer_state(0, led_state.caps_lock); */
+/*     return true; */
+/* } */
+
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(0, layer_state_cmp(state, _COLEMAK));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _COLEMAK_FR));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _GAMING));
+    rgblight_set_layer_state(3, layer_state_cmp(state, _QWERTY));
+    return state;
+}
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-  uint8_t default_layer = 0;
-  bool l_qwerty = false;
-  bool l_colemak = false;
-  bool l_colemak_fr = false;
-  bool l_gaming = false;
-  default_layer = eeconfig_read_default_layer();
+    state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 
-  if (default_layer & (1UL << _QWERTY)) {
-    l_qwerty = true;
-  } else if (default_layer & (1UL << _COLEMAK)) {
-    l_colemak = true;
-  } else if (default_layer & (1UL << _COLEMAK_FR)) {
-    l_colemak_fr = true;
-  } else if (default_layer & (1UL << _GAMING)) {
-    l_gaming = true;
-  }
+    rgblight_set_layer_state(4, layer_state_cmp(state, _LOWER));
+    rgblight_set_layer_state(5, layer_state_cmp(state, _RAISE));
+    rgblight_set_layer_state(6, layer_state_cmp(state, _FN));
+    rgblight_set_layer_state(7, layer_state_cmp(state, _SPACE_FN));
+    rgblight_set_layer_state(8, layer_state_cmp(state, _ADJUST));
 
-  state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-  switch (get_highest_layer(state)) {
-    case _LOWER:
-      rgblight_setrgb(0xff, 0x00, 0x00);
-      break;
-    case _RAISE:
-      rgblight_setrgb(0x00, 0xff, 0x00);
-      break;
-    case _SPACE_FN:
-      rgblight_setrgb(0xff, 0x45, 0x00);
-      break;
-    case _FN:
-      rgblight_setrgb(0x44, 0x3d, 0xff);
-      break;
-    case _ADJUST:
-      rgblight_setrgb(0xff, 0xff, 0x00);
-      break;
-    default:
-      if (l_qwerty) {
-        rgblight_setrgb(0x88, 0xcc, 0x00);
-      } else if (l_colemak) {
-        rgblight_setrgb(0x7f, 0x00, 0xff);
-      } else if (l_colemak_fr) {
-        rgblight_setrgb(0xff, 0xff, 0xff);
-      } else if (l_gaming) {
-        rgblight_setrgb(0x00, 0xb7, 0xeb);
-      }
-  }
-  return state;
+    return state;
 }
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
@@ -284,26 +306,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 bool dip_switch_update_user(uint8_t index, bool active) {
     switch (index) {
-        case 0: {
-#ifdef AUDIO_ENABLE
-            static bool play_sound = false;
-#endif
-            if (active) {
-#ifdef AUDIO_ENABLE
-                if (play_sound) { PLAY_SONG(plover_song); }
-#endif
-                layer_on(_ADJUST);
-            } else {
-#ifdef AUDIO_ENABLE
-                if (play_sound) { PLAY_SONG(plover_gb_song); }
-#endif
-                layer_off(_ADJUST);
-            }
-#ifdef AUDIO_ENABLE
-            play_sound = true;
-#endif
-            break;
-        }
         case 1:
             if (active) {
                 muse_mode = true;
