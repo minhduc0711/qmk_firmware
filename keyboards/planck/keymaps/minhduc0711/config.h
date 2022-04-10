@@ -1,6 +1,8 @@
 #pragma once
 
 #ifdef AUDIO_ENABLE
+    // Workaround for no startup sound https://github.com/qmk/qmk_firmware/issues/14242
+    #define AUDIO_INIT_DELAY
     #define STARTUP_SONG SONG(PLANCK_SOUND)
     // #define STARTUP_SONG SONG(NO_SOUND)
 
