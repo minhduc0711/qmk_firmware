@@ -216,30 +216,48 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+#ifdef AUDIO_ENABLE
+    float colemak_song[][2] = SONG(COLEMAK_SOUND);
+    float qwerty_song[][2] = SONG(QWERTY_SOUND);
+    float gaming_song[][2] = SONG(ONE_UP_SOUND);
+    float colemak_fr_song[][2] = SONG(FRENCH_ANTHEM);
+#endif
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case QWERTY:
-      if (record->event.pressed) {
-        print("mode just switched to qwerty and this is a huge string\n");
-        set_single_persistent_default_layer(_QWERTY);
-      }
-      return false;
-      break;
     case COLEMAK:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_COLEMAK);
+        #ifdef AUDIO_ENABLE
+          PLAY_SONG(colemak_song);
+        #endif
       }
       return false;
       break;
     case COLEMAK_FR:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_COLEMAK_FR);
+        #ifdef AUDIO_ENABLE
+          PLAY_SONG(colemak_fr_song);
+        #endif
       }
       return false;
       break;
     case GAMING:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_GAMING);
+        #ifdef AUDIO_ENABLE
+          PLAY_SONG(gaming_song);
+        #endif
+      }
+      return false;
+      break;
+    case QWERTY:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_QWERTY);
+        #ifdef AUDIO_ENABLE
+          PLAY_SONG(qwerty_song);
+        #endif
       }
       return false;
       break;
