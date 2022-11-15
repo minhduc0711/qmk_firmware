@@ -6,14 +6,12 @@
     Q__NOTE(_D7  ),  \
     Q__NOTE(_G7  ),
 
-#define FRENCH_ANTHEM \
-    E__NOTE(_D5), \
-    QD_NOTE(_D5), \
-    E__NOTE(_D5), \
-    H__NOTE(_G5), \
-    H__NOTE(_G5), \
-    H__NOTE(_A5), \
-    H__NOTE(_A5), \
-    HD_NOTE(_D6), \
-    Q__NOTE(_B5), \
-    QD_NOTE(_G5),
+#define BAGUETTE \
+    Q__NOTE(_F5),  \
+    Q__NOTE(_G5),  \
+    Q__NOTE(_A5),  \
+    Q__NOTE(_BF5),  \
+    Q__NOTE(_D6),  \
+    HD_NOTE(_A5),  \
+    Q__NOTE(_AF5),  \
+    H__NOTE(_G5),

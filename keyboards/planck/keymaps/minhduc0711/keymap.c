@@ -220,7 +220,7 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     float colemak_song[][2] = SONG(COLEMAK_SOUND);
     float qwerty_song[][2] = SONG(QWERTY_SOUND);
     float gaming_song[][2] = SONG(ONE_UP_SOUND);
-    float colemak_fr_song[][2] = SONG(FRENCH_ANTHEM);
+    float colemak_fr_song[][2] = SONG(BAGUETTE);
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
